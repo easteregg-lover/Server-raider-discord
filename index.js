@@ -2,24 +2,35 @@
 // I AM NOT RESPONSIBLE FOR ANY ISSUES, DAMAGES, OR CONSEQUENCES THAT MAY OCCUR FROM THE USE, COPYING, OR DISTRIBUTION OF THIS CODE. BY PROCEEDING, YOU AGREE TO THESE TERMS.
 // Made by easteregg_lover (github) [please dont remove this line :3]
 
-const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, InteractionType } = require('discord.js');
+const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 const BOT_TOKEN = 'YOUR_BOT_TOKEN';
-const CLIENT_ID = 'YOUR_BOT_CLIENT_ID';
-const ALLOWED_USER_ID = 'YOUR_USER_ID'; // Replace with the user ID you want to allow
+const CLIENT_ID = 'YOUR_CLIENT_ID';
+const GUILD_ID = 'YOUR_GUILD_ID'; // optional for testing only in one guild
+const ALLOWED_USER_ID = '1319726250318761995';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // Slash commands to register
 const commands = [
   new SlashCommandBuilder()
-    .setName('text')
-    .setDescription('Repeats text 20x with header format')
+    .setName('embed')
+    .setDescription('Repeats text 100x with header format (embed + credit footer)')
     .addStringOption(option =>
       option.setName('input').setDescription('Text to repeat').setRequired(true)),
   new SlashCommandBuilder()
-    .setName('textp')
-    .setDescription('Same as /text but without credit footer')
+    .setName('embed-without-credits')
+    .setDescription('Same as embed but sends embed without credit footer')
+    .addStringOption(option =>
+      option.setName('input').setDescription('Text to repeat').setRequired(true)),
+  new SlashCommandBuilder()
+    .setName('normal')
+    .setDescription('Same as embed but sends normal message (with credit footer)')
+    .addStringOption(option =>
+      option.setName('input').setDescription('Text to repeat').setRequired(true)),
+  new SlashCommandBuilder()
+    .setName('normal-without-credits')
+    .setDescription('Same as embed-without-credits but sends normal message (no credit footer)')
     .addStringOption(option =>
       option.setName('input').setDescription('Text to repeat').setRequired(true)),
 ];
@@ -47,22 +58,18 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
   if (interaction.isChatInputCommand()) {
     const input = interaction.options.getString('input');
-    const isTextP = interaction.commandName === 'textp';
-
-    if (isTextP && interaction.user.id !== ALLOWED_USER_ID) {
-      return await interaction.reply({ content: 'You are not allowed to use this command.', ephemeral: true });
-    }
+    const commandName = interaction.commandName;
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId(`confirm-${interaction.commandName}-${input}`)
-        .setLabel('Yes')
+        .setCustomId(`confirm-${commandName}-${input}`)
+        .setLabel('Ok!')
         .setStyle(ButtonStyle.Primary)
     );
 
     await interaction.reply({
-      content: 'Are you sure? Spam the button.',
-      ephemeral: true,
+      content: 'Are you sure?',
+      flags: 1 << 6, // Using flags for ephemeral response
       components: [row],
     });
   }
@@ -71,20 +78,35 @@ client.on('interactionCreate', async interaction => {
     const [prefix, cmd, input] = interaction.customId.split('-');
     if (!input) return;
 
-    let content = `# ${input.toUpperCase()}\n`.repeat(20);
-    if (cmd === 'text') {
-      content += `\n**Made by** [YOUR SERVER INVITE LINK]`;
+    let content = `# ${input.toUpperCase()}\n`.repeat(100);
+
+    switch (cmd) {
+      case 'embed':
+        content += `\n**Made by** [YOUR SERVER INVITE LINK]`;
+        const embedText = new EmbedBuilder()
+          .setTitle('Message:')
+          .setDescription(content);
+        await interaction.reply({ embeds: [embedText] });
+        break;
+      case 'embed-without-credits':
+        const embedWithoutCredits = new EmbedBuilder()
+          .setTitle('Message:')
+          .setDescription(content);
+        await interaction.reply({ embeds: [embedWithoutCredits] });
+        break;
+      case 'normal':
+        content += `\n**Made by** [YOUR SERVER INVITE LINK]`;
+        await interaction.reply({ content });
+        break;
+      case 'normal-without-credits':
+        await interaction.reply({ content });
+        break;
     }
-
-    const embed = new EmbedBuilder()
-      .setTitle('Message:')
-      .setDescription(content);
-
-    await interaction.reply({ embeds: [embed] });
   }
 });
 
 client.login(BOT_TOKEN);
+
 
 // I AM NOT RESPONSIBLE FOR ANY ISSUES, DAMAGES, OR CONSEQUENCES THAT MAY OCCUR FROM THE USE, COPYING, OR DISTRIBUTION OF THIS CODE. BY PROCEEDING, YOU AGREE TO THESE TERMS.
 // Made by easteregg_lover (github) [please dont remove this line :3]
