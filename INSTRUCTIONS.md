@@ -1,4 +1,4 @@
-# How te send multiple messages?
+# How to send multiple messages?
 Click on a confirmation button multiple times
 
 # How to create bot?
