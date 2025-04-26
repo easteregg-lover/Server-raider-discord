@@ -1,3 +1,6 @@
+# How te send multiple messages?
+Click on a confirmation button multiple times
+
 # How to create bot?
 Go to discord dev. portal https://discord.com/developers/applications
 
