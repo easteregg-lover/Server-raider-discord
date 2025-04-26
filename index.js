@@ -4,10 +4,11 @@
 
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
-const BOT_TOKEN = 'YOUR_BOT_TOKEN';
-const CLIENT_ID = 'YOUR_CLIENT_ID';
-const GUILD_ID = 'YOUR_GUILD_ID'; // optional for testing only in one guild
-const ALLOWED_USER_ID = 'ID_OF_SOMEONE';
+// Replace these with environment variables or secure storage
+const BOT_TOKEN = 'BOT_TOKEN';
+const CLIENT_ID = 'CLIENT_ID';
+const GUILD_ID = 'GUILD_ID'; // optional for testing only in one guild
+const ALLOWED_USER_ID = 'ALLOWED_USER_ID';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -60,6 +61,15 @@ client.on('interactionCreate', async interaction => {
     const input = interaction.options.getString('input');
     const commandName = interaction.commandName;
 
+    // Multiply input by 100 and check character limit
+    let content = `# ${input.toUpperCase()}\n`.repeat(100);
+    if (content.length > 2000) {
+      return await interaction.reply({
+        content: 'Too long message! Remember your message is multiplied by 100!',
+        flags: 1 << 6, // Send ephemeral message
+      });
+    }
+
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(`confirm-${commandName}-${input}`)
@@ -82,7 +92,7 @@ client.on('interactionCreate', async interaction => {
 
     switch (cmd) {
       case 'embed':
-        content += `\n**Made by** [YOUR SERVER INVITE LINK]`;
+        content += `\n**Made by** https://discord.gg/6WYaURhZCF`;
         const embedText = new EmbedBuilder()
           .setTitle('Message:')
           .setDescription(content);
@@ -95,7 +105,7 @@ client.on('interactionCreate', async interaction => {
         await interaction.reply({ embeds: [embedWithoutCredits] });
         break;
       case 'normal':
-        content += `\n**Made by** [YOUR SERVER INVITE LINK]`;
+        content += `\n**Made by** https://discord.gg/6WYaURhZCF`;
         await interaction.reply({ content });
         break;
       case 'normal-without-credits':
