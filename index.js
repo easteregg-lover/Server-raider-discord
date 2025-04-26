@@ -7,7 +7,7 @@ const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuild
 const BOT_TOKEN = 'YOUR_BOT_TOKEN';
 const CLIENT_ID = 'YOUR_CLIENT_ID';
 const GUILD_ID = 'YOUR_GUILD_ID'; // optional for testing only in one guild
-const ALLOWED_USER_ID = '1319726250318761995';
+const ALLOWED_USER_ID = 'ID_OF_SOMEONE';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
