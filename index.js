@@ -1,3 +1,7 @@
+
+// I AM NOT RESPONSIBLE FOR ANY ISSUES, DAMAGES, OR CONSEQUENCES THAT MAY OCCUR FROM THE USE, COPYING, OR DISTRIBUTION OF THIS CODE. BY PROCEEDING, YOU AGREE TO THESE TERMS.
+// Made by easteregg_lover (github) [please dont remove this line :3]
+
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, InteractionType } = require('discord.js');
 
 const BOT_TOKEN = 'YOUR_BOT_TOKEN';
