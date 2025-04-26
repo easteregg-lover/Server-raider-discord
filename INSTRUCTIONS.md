@@ -23,6 +23,6 @@ Click on authorize.
 
 I reccomend using such services as discloud, but remember they can ban you.
 
-Tutorial vide for discloud: https://youtu.be/k2HscBZPreY?si=6tdJwNDXppoWhvaq
+Tutorial video for discloud: https://youtu.be/k2HscBZPreY?si=6tdJwNDXppoWhvaq
 
 # I AM NOT RESPONSIBLE FOR ANY ISSUES, DAMAGES, OR CONSEQUENCES THAT MAY OCCUR FROM THE USE, COPYING, OR DISTRIBUTION OF THIS CODE. BY PROCEEDING, YOU AGREE TO THESE TERMS.
