@@ -2,6 +2,10 @@
 
 https://youtu.be/Nl7pg-2oMIE?si=Ckf4SP166KwABwoH
 
+# Discord server
+
+https://discord.gg/Ev4xyNsmW6
+
 # How to send multiple messages?
 Click on a confirmation button multiple times
 
