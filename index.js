@@ -1,18 +1,11 @@
-
-// I AM NOT RESPONSIBLE FOR ANY ISSUES, DAMAGES, OR CONSEQUENCES THAT MAY OCCUR FROM THE USE, COPYING, OR DISTRIBUTION OF THIS CODE. BY PROCEEDING, YOU AGREE TO THESE TERMS.
-// Made by easteregg_lover (github) [please dont remove this line :3]
-
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
-// Replace these with environment variables or secure storage
 const BOT_TOKEN = 'BOT_TOKEN';
-const CLIENT_ID = 'CLIENT_ID';
-const GUILD_ID = 'GUILD_ID'; // optional for testing only in one guild
-const ALLOWED_USER_ID = 'ALLOWED_USER_ID';
+const CLIENT_ID = 'BOT_CLIENT_ID';
+const ALLOWED_USER_ID = 'DISCORD_USER_ID'; // Replace with the allowed user's ID
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// Slash commands to register
 const commands = [
   new SlashCommandBuilder()
     .setName('embed')
@@ -20,7 +13,7 @@ const commands = [
     .addStringOption(option =>
       option.setName('input').setDescription('Text to repeat').setRequired(true)),
   new SlashCommandBuilder()
-    .setName('embed-without-credits')
+    .setName('embedwithoutcredits')
     .setDescription('Same as embed but sends embed without credit footer')
     .addStringOption(option =>
       option.setName('input').setDescription('Text to repeat').setRequired(true)),
@@ -30,7 +23,7 @@ const commands = [
     .addStringOption(option =>
       option.setName('input').setDescription('Text to repeat').setRequired(true)),
   new SlashCommandBuilder()
-    .setName('normal-without-credits')
+    .setName('normalwithoutcredits')
     .setDescription('Same as embed-without-credits but sends normal message (no credit footer)')
     .addStringOption(option =>
       option.setName('input').setDescription('Text to repeat').setRequired(true)),
@@ -98,7 +91,7 @@ client.on('interactionCreate', async interaction => {
           .setDescription(content);
         await interaction.reply({ embeds: [embedText] });
         break;
-      case 'embed-without-credits':
+      case 'embedwithoutcredits':
         const embedWithoutCredits = new EmbedBuilder()
           .setTitle('Message:')
           .setDescription(content);
@@ -108,7 +101,7 @@ client.on('interactionCreate', async interaction => {
         content += `\n**Made by** https://discord.gg/6WYaURhZCF`;
         await interaction.reply({ content });
         break;
-      case 'normal-without-credits':
+      case 'normalwithoutcredits':
         await interaction.reply({ content });
         break;
     }
@@ -116,7 +109,3 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(BOT_TOKEN);
-
-
-// I AM NOT RESPONSIBLE FOR ANY ISSUES, DAMAGES, OR CONSEQUENCES THAT MAY OCCUR FROM THE USE, COPYING, OR DISTRIBUTION OF THIS CODE. BY PROCEEDING, YOU AGREE TO THESE TERMS.
-// Made by easteregg_lover (github) [please dont remove this line :3]
