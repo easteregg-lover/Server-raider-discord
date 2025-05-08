@@ -1,3 +1,4 @@
-# Fixed allowed user id!
+# Created an app for bot creation!
 
-Now, if you arent in allowed-user-id you cannot use without credits command.
+Link for dowload: https://files.fm/u/rm7nvtsp62
+tutorial soon!
