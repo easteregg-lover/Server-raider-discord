@@ -3,9 +3,9 @@
 
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
-const BOT_TOKEN = 'BOT_TOKEN';
-const CLIENT_ID = 'BOT_CLIENT_ID';
-const ALLOWED_USER_ID = 'DISCORD_USER_ID'; // Replace with the allowed user's ID
+const BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
+const CLIENT_ID = 'YOUR_BOT_CLIENT_ID_HERE';
+const ALLOWED_USER_ID = 'SOMEONES_ID'; // Replace with the allowed user's ID
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -56,6 +56,15 @@ client.on('interactionCreate', async interaction => {
   if (interaction.isChatInputCommand()) {
     const input = interaction.options.getString('input');
     const commandName = interaction.commandName;
+
+    // Check if user is allowed to use restricted commands
+    if ((commandName === 'embedwithoutcredits' || commandName === 'normalwithoutcredits') 
+        && interaction.user.id !== ALLOWED_USER_ID) {
+      return await interaction.reply({
+        content: 'You are not authorized to use this command.',
+        flags: 1 << 6, // Send ephemeral message
+      });
+    }
 
     // Multiply input by 100 and check character limit
     let content = `# ${input.toUpperCase()}\n`.repeat(100);
