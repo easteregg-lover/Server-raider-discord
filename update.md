@@ -1,4 +1,4 @@
 # Created an app for bot creation!
 
 Link for dowload: https://files.fm/u/rm7nvtsp62
-tutorial soon!
+tutorial in readme.md!
